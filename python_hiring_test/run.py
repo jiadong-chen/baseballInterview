@@ -2,29 +2,18 @@
 
 from pandas import *
 
+
 def subjectFilter(Split):
+	# used to return the data selected by 'Split'
 	data = DataFrame.from_csv('C:/Users/Jiadong Chen/Desktop/interview/python_hiring_test/python_hiring_test/data/raw/pitchdata.csv')
-	#print(data)
 	if Split == 'vs LHH':
-		print('ssssss')
 		return data[(data['HitterSide'] =='L')]
-		
-		
 	if Split == 'vs RHH':
-		print('xxxxxxxxx')
 		return data[(data['HitterSide'] =='R')]
-			
 	if Split == 'vs LHP':
-		print('xxxxxxxsxx')
 		return data[(data['PitcherSide'] =='L')]
-
-		
-	if Split == 'vs RHP':
-		print('xxxxxxxxs')
-		return data[(data['PitcherSide'] =='R')]
-		
-
-	
+	else:
+		return data[(data['PitcherSide'] =='R')]	
 
 
 def dataAnalysis():
@@ -34,17 +23,6 @@ def dataAnalysis():
 	for i in lines[1::]:
 		Stat, Subject, Split = i.split(',')
 		Split = Split[0:6]
-		def subjectFilter(x):
-			# used to return the data selected by 'Split'
-			data = DataFrame.from_csv('C:/Users/Jiadong Chen/Desktop/interview/python_hiring_test/python_hiring_test/data/raw/pitchdata.csv')
-			if Split == 'vs LHH':
-				return data[(data['HitterSide'] =='L')]
-			if Split == 'vs RHH':
-				return data[(data['HitterSide'] =='R')]
-			if Split == 'vs LHP':
-				return data[(data['PitcherSide'] =='L')]
-			else:
-				return data[(data['PitcherSide'] =='R')]
 		dataSelected = subjectFilter(Split)
 		dataSelected = dataSelected.groupby([Subject]).sum()
 		# group the data by 'Subject'
